@@ -1,6 +1,5 @@
 #' join_features
 #'
-#' \lifecycle{experimental}
 #'
 #' @description join_features() extracts and joins information for specific
 #'   features
