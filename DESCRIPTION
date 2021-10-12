@@ -1,10 +1,10 @@
 Package: ttservice
 Type: Package
-Title: A service package for tidy transcriptomics
-Version: 0.1.0
+Title: A Service for Tidy Transcriptomics Software Suite
+Version: 0.1.2
 Authors@R: c(person("Stefano", "Mangiola", email = "mangiolastefano@gmail.com",
                   role = c("aut", "cre")) )
-Description: This is a service package for tidy transcriptomics suite. It provides generic methods that are used by more than one package, avoiding conflicts. 
+Description: It provides generic methods that are used by more than one package, avoiding conflicts. This package will be imported by 'tidySingleCellExperiment' and 'tidyseurat'. The implemented method is join_features(). 
 License: GPL-3
 Depends:
     R (>= 4.0.0)
