@@ -30,7 +30,6 @@
 #' @name join_features
 #'
 #' @export
-
 setGeneric("join_features", function(.data,
                                        features = NULL,
                                        all = FALSE,
@@ -41,4 +40,83 @@ setGeneric("join_features", function(.data,
   standardGeneric("join_features"))
 
 
+#' Efficiently bind multiple data frames by row and column
+#'
+#' This is an efficient implementation of the common pattern of
+#' `do.call(rbind, dfs)` or `do.call(cbind, dfs)` for binding many
+#' data frames into one.
+#'
+#' The output of `bind_rows()` will contain a column if that column
+#' appears in any of the inputs.
+#'
+#' @param ... Data frames to combine.
+#'
+#'   Each argument can either be a data frame, a list that could be a data
+#'   frame, or a list of data frames.
+#'
+#'   When row-binding, columns are matched by name, and any missing
+#'   columns will be filled with NA.
+#'
+#'   When column-binding, rows are matched by position, so all data
+#'   frames must have the same number of rows. To match by value, not
+#'   position, see mutate-joins.
+#' @param .id Data frame identifier.
+#'
+#'   When `.id` is supplied, a new column of identifiers is
+#'   created to link each row to its original data frame. The labels
+#'   are taken from the named arguments to `bind_rows()`. When a
+#'   list of data frames is supplied, the labels are taken from the
+#'   names of the list. If no names are found a numeric sequence is
+#'   used instead.
+#' @param add.cell.ids from Seurat 3.0 A character vector of length(x = c(x, y)). Appends the corresponding values to the start of each objects' cell names.
+#'
+#' @return `bind_rows()` and `bind_cols()` return the same type as
+#'   the first input, either a data frame, `tbl_df`, or `grouped_df`.
+#' @examples
+#' `%>%` = magrittr::`%>%`
+#' tt = pbmc_small
+#' bind_rows(    tt, tt  )
+#'
+#' tt_bind = tt %>% select(nCount_RNA ,nFeature_RNA)
+#' tt %>% bind_cols(tt_bind)
+#'
+#' @name bind
+NULL
 
+#' @rdname dplyr-methods
+#' @name bind_rows
+#'
+#' @inheritParams bind
+#'
+#' @export
+#'
+bind_rows <- function(..., .id = NULL,  add.cell.ids = NULL) {
+  UseMethod("bind_rows")
+}
+
+#' @export
+#'
+#' @importFrom dplyr bind_rows
+bind_rows.data.frame <-  function(..., .id = NULL,  add.cell.ids = NULL)
+{
+  dplyr::bind_rows(..., .id = .id)
+}
+
+#' @rdname dplyr-methods
+#' @name bind_cols
+#'
+#' @inheritParams bind
+#'
+#' @export
+#'
+bind_cols <- function(..., .id = NULL) {
+  UseMethod("bind_cols")
+}
+
+#' @export
+#'
+#' @importFrom dplyr bind_cols
+bind_cols.data.frame <-  function(..., .id = NULL)
+{
+  dplyr::bind_cols(..., .id = .id)
+}
