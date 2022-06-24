@@ -4,8 +4,6 @@
 #' @description join_features() extracts and joins information for specific
 #'   features
 #'
-#' @importFrom rlang enquo
-#' @importFrom magrittr "%>%"
 #'
 #'
 #' @param .data A tidy SingleCellExperiment object
@@ -23,7 +21,7 @@
 #' @examples
 #'
 #' print("this is a method definition. Example is not applicable")
-#' # <SCE_object> %>% join_features(features=c("HLA-DRA", "LYZ"))
+#' # <SCE_object> |> join_features(features=c("HLA-DRA", "LYZ"))
 #'
 #' @docType methods
 #' @rdname join_features
@@ -73,12 +71,11 @@ setGeneric("join_features", function(.data,
 #' @return `bind_rows()` and `bind_cols()` return the same type as
 #'   the first input, either a data frame, `tbl_df`, or `grouped_df`.
 #' @examples
-#' `%>%` = magrittr::`%>%`
 #' tt = pbmc_small
 #' bind_rows(    tt, tt  )
 #'
-#' tt_bind = tt %>% select(nCount_RNA ,nFeature_RNA)
-#' tt %>% bind_cols(tt_bind)
+#' tt_bind = tt |> select(nCount_RNA ,nFeature_RNA)
+#' tt |> bind_cols(tt_bind)
 #'
 #' @name bind
 NULL
