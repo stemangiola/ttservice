@@ -37,7 +37,39 @@ setGeneric("join_features", function(.data,
                                        )
   standardGeneric("join_features"))
 
-
+#' Aggregate cells
+#'
+#' @description Combine cells into groups based on shared variables and aggregate feature counts.
+#'
+#' @importFrom magrittr "%>%"
+#' @importFrom rlang enquo
+#' @importFrom tibble enframe
+#' @importFrom Matrix rowSums
+#'
+#' @name aggregate_cells
+#' @rdname aggregate_cells
+#'
+#' @param .data A tidySingleCellExperiment object
+#' @param .sample A vector of variables by which cells are aggregated
+#' @param slot The slot to which the function is applied
+#' @param assays The assay to which the function is applied
+#' @param aggregation_function The method of cell-feature value aggregation
+#'
+#' @return A tibble object
+#'
+#' @examples
+#' data("pbmc_small")
+#' pbmc_small |>
+#'   aggregate_cells(c(groups, ident), assays = "counts")
+#'
+#' @export
+#'
+setGeneric("aggregate_cells", function(.data,
+                                       .sample = NULL,
+                                       slot = "data",
+                                       assays = NULL,
+                                       aggregation_function = Matrix::rowSums)
+  standardGeneric("aggregate_cells"))
 
 
 #' #' Efficiently bind multiple data frames by row and column
