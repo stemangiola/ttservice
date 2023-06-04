@@ -41,11 +41,7 @@ setGeneric("join_features", function(.data,
 #'
 #' @description Combine cells into groups based on shared variables and aggregate feature counts.
 #'
-#' @importFrom magrittr "%>%"
-#' @importFrom rlang enquo
-#' @importFrom tibble enframe
-#' @importFrom Matrix rowSums
-#'
+#' @docType methods
 #' @name aggregate_cells
 #' @rdname aggregate_cells
 #'

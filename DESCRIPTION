@@ -9,7 +9,8 @@ License: GPL-3
 Depends:
     R (>= 4.0.0)
 Imports:
-    dplyr
+    dplyr,
+    Matrix
 Suggests:
     methods
 Encoding: UTF-8
