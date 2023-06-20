@@ -42,8 +42,11 @@ setGeneric("join_features", function(.data,
 #' @description Combine cells into groups based on shared variables and aggregate feature counts.
 #'
 #' @docType methods
+#' 
 #' @name aggregate_cells
 #' @rdname aggregate_cells
+#'
+#' @importFrom Matrix rowSums
 #'
 #' @param .data A tidySingleCellExperiment object
 #' @param .sample A vector of variables by which cells are aggregated
