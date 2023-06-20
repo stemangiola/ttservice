@@ -54,9 +54,8 @@ setGeneric("join_features", function(.data,
 #' @return A tibble object
 #'
 #' @examples
-#' data("pbmc_small")
-#' pbmc_small |>
-#'   aggregate_cells(c(groups, ident), assays = "counts")
+#' 
+#' print("pbmc_small |> aggregate_cells(c(groups, ident), assays = \"counts\")")
 #'
 #' @export
 #'
