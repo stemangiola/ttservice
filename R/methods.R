@@ -123,6 +123,21 @@ bind_rows.default <-  function(..., .id = NULL,  add.cell.ids = NULL)
   dplyr::bind_rows(..., .id = .id)
 }
 
+#' @export
+#'
+#' @importFrom dplyr bind_rows
+bind_rows.data.frame <-  function(..., .id = NULL,  add.cell.ids = NULL)
+{
+  dplyr::bind_rows(..., .id = .id)
+}
+
+#' @export
+#'
+#' @importFrom dplyr bind_rows
+bind_rows.list <-  function(..., .id = NULL,  add.cell.ids = NULL)
+{
+  dplyr::bind_rows(..., .id = .id)
+}
 #' Efficiently bind multiple data frames by row and column
 #'
 #' This is an efficient implementation of the common pattern of
@@ -179,6 +194,22 @@ bind_cols <- function(..., .id = NULL) {
 #'
 #' @importFrom dplyr bind_cols
 bind_cols.default <-  function(..., .id = NULL)
+{
+  dplyr::bind_cols(..., .id = .id)
+}
+
+#' @export
+#'
+#' @importFrom dplyr bind_cols
+bind_cols.data.frame <-  function(..., .id = NULL)
+{
+  dplyr::bind_cols(..., .id = .id)
+}
+
+#' @export
+#'
+#' @importFrom dplyr bind_cols
+bind_cols.list <-  function(..., .id = NULL)
 {
   dplyr::bind_cols(..., .id = .id)
 }
