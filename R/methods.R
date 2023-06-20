@@ -118,12 +118,12 @@ bind_rows <- function(..., .id = NULL,  add.cell.ids = NULL) {
 #' @export
 #'
 #' @importFrom dplyr bind_rows
-bind_rows.data.frame <-  function(..., .id = NULL,  add.cell.ids = NULL)
+bind_rows.default <-  function(..., .id = NULL,  add.cell.ids = NULL)
 {
   dplyr::bind_rows(..., .id = .id)
 }
 
-#' #' Efficiently bind multiple data frames by row and column
+#' Efficiently bind multiple data frames by row and column
 #'
 #' This is an efficient implementation of the common pattern of
 #' `do.call(rbind, dfs)` or `do.call(cbind, dfs)` for binding many
@@ -162,7 +162,13 @@ bind_rows.data.frame <-  function(..., .id = NULL,  add.cell.ids = NULL)
 #' @rdname dplyr-methods
 #' @name bind_cols
 #'
+NULL
+
+#' @rdname dplyr-methods
 #'
+#' @inheritParams bind_cols
+#'
+#' @export
 #' @export
 #'
 bind_cols <- function(..., .id = NULL) {
@@ -172,7 +178,7 @@ bind_cols <- function(..., .id = NULL) {
 #' @export
 #'
 #' @importFrom dplyr bind_cols
-bind_cols.data.frame <-  function(..., .id = NULL)
+bind_cols.default <-  function(..., .id = NULL)
 {
   dplyr::bind_cols(..., .id = .id)
 }
