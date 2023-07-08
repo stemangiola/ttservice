@@ -40,7 +40,7 @@ This function extracts information for specified features and
 }
 \examples{
 
-print("this is a method definition. Example is not applicable")
-# <SCE_object> |> join_features(features=c("HLA-DRA", "LYZ"))
+print("this is a method generics Example is not applicable")
+# <object> |> join_features(features=c("HLA-DRA", "LYZ"))
 
 }
