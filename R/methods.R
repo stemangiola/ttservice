@@ -42,8 +42,11 @@ setGeneric("join_features", function(.data,
 #' @description Combine cells into groups based on shared variables and aggregate feature counts.
 #'
 #' @docType methods
+#'
 #' @name aggregate_cells
 #' @rdname aggregate_cells
+#'
+#' @importFrom Matrix rowSums
 #'
 #' @param .data A tidySingleCellExperiment object
 #' @param .sample A vector of variables by which cells are aggregated
@@ -55,8 +58,8 @@ setGeneric("join_features", function(.data,
 #' @return A tibble object
 #'
 #' @examples
-#' print("this is a method generics Example is not applicable")
-#' # <object> |> aggregate_cells(c(groups, ident), assays = "counts")
+#'
+#' print("pbmc_small |> aggregate_cells(c(groups, ident), assays = \"counts\")")
 #'
 #' @export
 #'
@@ -119,12 +122,27 @@ bind_rows <- function(..., .id = NULL,  add.cell.ids = NULL) {
 #' @export
 #'
 #' @importFrom dplyr bind_rows
+bind_rows.default <-  function(..., .id = NULL,  add.cell.ids = NULL)
+{
+  dplyr::bind_rows(..., .id = .id)
+}
+
+#' @export
+#'
+#' @importFrom dplyr bind_rows
 bind_rows.data.frame <-  function(..., .id = NULL,  add.cell.ids = NULL)
 {
   dplyr::bind_rows(..., .id = .id)
 }
 
-#' #' Efficiently bind multiple data frames by row and column
+#' @export
+#'
+#' @importFrom dplyr bind_rows
+bind_rows.list <-  function(..., .id = NULL,  add.cell.ids = NULL)
+{
+  dplyr::bind_rows(..., .id = .id)
+}
+#' Efficiently bind multiple data frames by row and column
 #'
 #' This is an efficient implementation of the common pattern of
 #' `do.call(rbind, dfs)` or `do.call(cbind, dfs)` for binding many
@@ -163,7 +181,13 @@ bind_rows.data.frame <-  function(..., .id = NULL,  add.cell.ids = NULL)
 #' @rdname dplyr-methods
 #' @name bind_cols
 #'
+NULL
+
+#' @rdname dplyr-methods
 #'
+#' @inheritParams bind_cols
+#'
+#' @export
 #' @export
 #'
 bind_cols <- function(..., .id = NULL) {
@@ -173,7 +197,23 @@ bind_cols <- function(..., .id = NULL) {
 #' @export
 #'
 #' @importFrom dplyr bind_cols
+bind_cols.default <-  function(..., .id = NULL)
+{
+  dplyr::bind_cols(..., .id = .id)
+}
+
+#' @export
+#'
+#' @importFrom dplyr bind_cols
 bind_cols.data.frame <-  function(..., .id = NULL)
+{
+  dplyr::bind_cols(..., .id = .id)
+}
+
+#' @export
+#'
+#' @importFrom dplyr bind_cols
+bind_cols.list <-  function(..., .id = NULL)
 {
   dplyr::bind_cols(..., .id = .id)
 }
