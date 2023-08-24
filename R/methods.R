@@ -53,6 +53,7 @@ setGeneric("join_features", function(.data,
 #' @param slot The slot to which the function is applied
 #' @param assays The assay to which the function is applied
 #' @param aggregation_function The method of cell-feature value aggregation
+#' @param ... Used for future extendibility
 #'
 #' @return A tibble object
 #'

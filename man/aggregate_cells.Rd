@@ -11,7 +11,7 @@ aggregate_cells(
   slot = "data",
   assays = NULL,
   aggregation_function = Matrix::rowSums,
-  .metadata_columns_to_keep = NULL
+  ...
 )
 }
 \arguments{
@@ -25,7 +25,7 @@ aggregate_cells(
 
 \item{aggregation_function}{The method of cell-feature value aggregation}
 
-\item{.metadata_columns_to_keep}{a column vector e.g. c(column_1, column_2), which combinqtion is unique for `.sample` to be included in the pseudobulk metadata. If NULL those columns will be automatically detected, which operation can be slow for large objects.}
+\item{...}{Used for future extendibility}
 }
 \value{
 A tibble object
