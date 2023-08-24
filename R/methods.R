@@ -68,7 +68,8 @@ setGeneric("aggregate_cells", function(.data,
                                        slot = "data",
                                        assays = NULL,
                                        aggregation_function = Matrix::rowSums,
-                                       .metadata_columns_to_keep = NULL)
+                                       .metadata_columns_to_keep = NULL,
+                                      ...)
   standardGeneric("aggregate_cells"))
 
 
