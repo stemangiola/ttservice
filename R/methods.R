@@ -53,7 +53,6 @@ setGeneric("join_features", function(.data,
 #' @param slot The slot to which the function is applied
 #' @param assays The assay to which the function is applied
 #' @param aggregation_function The method of cell-feature value aggregation
-#' @param .metadata_columns_to_keep a column vector e.g. c(column_1, column_2), which combinqtion is unique for `.sample` to be included in the pseudobulk metadata. If NULL those columns will be automatically detected, which operation can be slow for large objects.
 #'
 #' @return A tibble object
 #'
@@ -68,7 +67,6 @@ setGeneric("aggregate_cells", function(.data,
                                        slot = "data",
                                        assays = NULL,
                                        aggregation_function = Matrix::rowSums,
-                                       .metadata_columns_to_keep = NULL,
                                       ...)
   standardGeneric("aggregate_cells"))
 
