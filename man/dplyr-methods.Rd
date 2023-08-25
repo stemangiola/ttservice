@@ -3,7 +3,7 @@
 \name{bind_rows}
 \alias{bind_rows}
 \alias{bind_cols}
-\title{#' Efficiently bind multiple data frames by row and column}
+\title{Efficiently bind multiple data frames by row and column}
 \usage{
 bind_rows(..., .id = NULL, add.cell.ids = NULL)
 
