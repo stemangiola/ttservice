@@ -10,7 +10,8 @@ Depends:
     R (>= 4.0.0)
 Imports:
     dplyr,
-    Matrix
+    Matrix,
+    plotly
 Suggests:
     methods
 Encoding: UTF-8
