@@ -263,3 +263,34 @@ plot_ly.default <- function(data=data.frame(),
                   split=split, frame=frame,
                   width=width, height=height, source=source)
 }
+
+#' Add class to abject
+#'
+#' @keywords internal
+#' @export
+#'
+#' @param var A tibble
+#' @param name A character name of the attribute
+#'
+#' @return A tibble with an additional attribute
+add_class = function(var, name) {
+  
+  if(!name %in% class(var)) class(var) <- prepend(class(var),name)
+  
+  var
+}
+
+#' Remove class to abject
+#'
+#' @keywords internal
+#' @noRd
+#'
+#'
+#' @param var A tibble
+#' @param name A character name of the class
+#'
+#' @return A tibble with an additional attribute
+drop_class = function(var, name) {
+  class(var) <- class(var)[!class(var)%in%name]
+  var
+}
