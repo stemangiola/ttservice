@@ -1,9 +1,11 @@
 Package: ttservice
 Type: Package
 Title: A Service for Tidy Transcriptomics Software Suite
-Version: 0.5.2
-Author: Stefano Mangiola [aut, cre]
-Maintainer: Stefano Mangiola <mangiolastefano@gmail.com>
+Version: 0.5.3
+Authors@R: person(given = "Stefano",
+                  family = "Mangiola",
+                  role = c("aut", "cre"),
+                  email = "mangiolastefano@gmail.com")
 Description: It provides generic methods that are used by more than one package, avoiding conflicts. This package will be imported by 'tidySingleCellExperiment' and 'tidyseurat'. 
 License: GPL-3
 Depends:
