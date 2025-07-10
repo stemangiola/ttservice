@@ -308,7 +308,7 @@ plot_ly.default <- function(data=data.frame(),
 #' @return A tibble with an additional attribute
 add_class = function(var, name) {
   
-  if(!name %in% class(var)) class(var) <- prepend(class(var),name)
+  if(!name %in% class(var)) class(var) <- c(name, class(var))
   
   var
 }
