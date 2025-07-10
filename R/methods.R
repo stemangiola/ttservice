@@ -80,7 +80,8 @@ setGeneric("aggregate_cells", function(.data,
 #' @name append_samples
 #' @rdname append_samples
 #'
-#' @param ... Genomic data containers to combine.
+#' @param x A genomic data container to combine with others
+#' @param ... Additional genomic data containers to combine
 #'
 #'   Each argument should be a genomic data object such as a SummarizedExperiment,
 #'   SingleCellExperiment, SpatialExperiment, or Seurat object (provided that
@@ -92,16 +93,8 @@ setGeneric("aggregate_cells", function(.data,
 #'
 #'   When column-binding, samples (e.g., cells) are matched by position, so all objects
 #'   must have the same number of features. To match by value, not position, see mutate-joins.
-#' @param .id Object identifier.
 #'
-#'   When `.id` is supplied, a new column or metadata field of identifiers is
-#'   created to link each sample to its original object. The labels
-#'   are taken from the named arguments to `append_samples()`. When a
-#'   list of objects is supplied, the labels are taken from the
-#'   names of the list. If no names are found a numeric sequence is
-#'   used instead.
-#'
-#' @return A combined genomic object object
+#' @return A combined genomic object
 #'
 #' @examples
 #'
@@ -109,8 +102,7 @@ setGeneric("aggregate_cells", function(.data,
 #'
 #' @export
 #'
-setGeneric("append_samples", function(..., .id = NULL)
-  standardGeneric("append_samples"))
+append_samples <- function(x, ...) UseMethod("append_samples")
 
 
 #' Efficiently bind multiple data frames by row and column
