@@ -22,9 +22,10 @@ check_and_install_packages <- function(packages) {
     pkg = packages,
     action = function(...) {
       if (!requireNamespace("BiocManager", quietly = TRUE)) {
-        install.packages("BiocManager", repos = c("https://cloud.r-project.org"))
+        install.packages("BiocManager", repos = getOption("repos"))
       }
       BiocManager::install(..., ask = FALSE, update = FALSE)
     }
   )
+  invisible(NULL)
 }
