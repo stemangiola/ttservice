@@ -31,6 +31,7 @@ my_stop = function() {
 #' 
 #' 
 #' @import tibble
+#' @importFrom dplyr filter
 #'
 #' @param .data A tibble of read counts
 #' @param abundance A character name of the read count column
@@ -119,6 +120,14 @@ parse_formula <- function(fm) {
 #'
 #' @importFrom stats setNames
 #' @importFrom stats cov
+#' @importFrom tidyr gather
+#' @importFrom tidyr spread
+#' @importFrom dplyr group_by
+#' @importFrom dplyr mutate
+#' @importFrom dplyr ungroup
+#' @importFrom dplyr arrange
+#' @importFrom dplyr select
+#' @importFrom tidyselect any_of
 #'
 #' @param df A tibble
 #' @param .formula a formula
@@ -159,19 +168,19 @@ add_tt_columns = function(.data,
                           .transcript,
                           abundance,
                           .abundance = NULL,
-													.abundance_scaled = NULL,
-													.abundance_adjusted = NULL){
+                          .abundance_scaled = NULL,
+                          .abundance_adjusted = NULL){
 
   # Make col names
   .sample = enquo(.sample)
   .transcript = enquo(.transcript)
-  .abundance = enquo(.abundance)
+  abundance = enquo(abundance)
   .abundance_scaled = enquo(.abundance_scaled)
   .abundance_adjusted = enquo(.abundance_adjusted)
   tt_list <- list(
     .sample = .sample,
     .transcript = .transcript,
-    .abundance = .abundance
+    .abundance = abundance
   )
   if (quo_is_symbol(.abundance_scaled)) {
     tt_list <- c(tt_list, list(.abundance_scaled = .abundance_scaled))
@@ -410,12 +419,12 @@ get_sample_counts = function(.data, .sample, abundance, .abundance = NULL){
     .sample =  get_tt_columns(.data)$.sample
   else my_stop()
 
-  if( .abundance |> quo_is_symbol() ) .abundance = .abundance
+  if( abundance |> quo_is_symbol() ) abundance = abundance
   else if(".abundance" %in% (.data |> get_tt_columns() |> names()))
-    .abundance = get_tt_columns(.data)$.abundance
+    abundance = get_tt_columns(.data)$.abundance
   else my_stop()
 
-  list(.sample = .sample, .abundance = .abundance)
+  list(.sample = .sample, .abundance = abundance)
 
 }
 
@@ -496,27 +505,6 @@ get_sample_transcript = function(.data, .sample, .transcript){
 
 }
 
-#' Get column names either from user or from attributes
-#'
-#' @keywords internal
-#' @noRd
-#'
-#' @importFrom rlang quo_is_symbol
-#'
-#' @param .data A tibble
-#' @param .sample A character name of the sample column
-#'
-#' @return A list of column enquo or error
-get_sample = function(.data, .sample){
-
-  if( .sample |> quo_is_symbol() ) .sample = .sample
-  else if(".sample" %in% (.data |> get_tt_columns() |> names()))
-    .sample =  get_tt_columns(.data)$.sample
-  else my_stop()
-
-  list(.sample = .sample)
-
-}
 
 
 
@@ -1381,7 +1369,7 @@ drop_enquo_env <- function(q) {
 #' @importFrom stats lsfit
 #'
 #' @param mix A data frame containing mixture expression profiles
-#' @param reference A data frame containing reference expression profiles for cell types (default = X_cibersort)
+#' @param reference A data frame containing reference expression profiles for cell types
 #' @param intercept Logical indicating whether to include intercept in the regression model (default = TRUE)
 #'
 #' @details
@@ -1394,7 +1382,7 @@ drop_enquo_env <- function(q) {
 #' @return A data frame containing estimated cell type proportions
 #'
 #'
-run_llsr = function(mix, reference = X_cibersort,  intercept= TRUE) {
+run_llsr = function(mix, reference,  intercept= TRUE) {
   # Get common markers
   markers = intersect(rownames(mix), rownames(reference))
   
