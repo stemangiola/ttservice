@@ -955,6 +955,9 @@ do_validate = function(){
 #'
 #' @importFrom stringr str_remove
 #' @importFrom stringr str_replace_all
+#' @importFrom tidyselect starts_with
+#' @importFrom tidyr pivot_longer
+#' @importFrom dplyr bind_cols
 #'
 multivariable_differential_tissue_composition = function(
 	deconvoluted,
@@ -1279,6 +1282,7 @@ rowMedians = function(.data, na.rm){
   apply(.data, 1, median, na.rm=na.rm)
 }
 
+#' @importFrom purrr reduce
 fill_NA_matrix_with_factor_colwise = function(.data, factor){
 
   rn = rownames(.data)
