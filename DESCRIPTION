@@ -12,24 +12,11 @@ Depends:
     R (>= 4.0.0)
 Imports:
     dplyr,
-    lifecycle,
-    magrittr,
     Matrix,
     plotly,
-    purrr,
-    rlang,
-    S4Vectors,
-    stringr,
-    tibble,
-    tidyr,
-    tidyselect
+    rlang
 Suggests:
-    betareg,
-    boot,
-    broom,
-    methods,
-    survival,
-    survminer
+    methods
 Encoding: UTF-8
 LazyData: true
 RoxygenNote: 7.3.2
