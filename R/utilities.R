@@ -48,7 +48,7 @@ error_if_counts_is_na = function(.data, abundance, .abundance = NULL) {
   }
 
   # Do the check
-  if (.data |> filter(!!abundance |> is.na()) |> nrow() |> gt(0))
+  if (.data |> filter(!!abundance |> is.na()) |> nrow() > 0)
     stop("tidybulk says: You have NA values in your counts")
 
   # If all good return original data frame
@@ -64,6 +64,7 @@ error_if_counts_is_na = function(.data, abundance, .abundance = NULL) {
 #' 
 #' @import tibble
 #' @importFrom purrr map
+#' @importFrom magrittr not
 #'
 #'
 #' @param .data A tibble of read counts
@@ -601,12 +602,12 @@ get_elements_features_abundance = function(.data, .element, .feature, abundance,
     .feature =  get_tt_columns(.data)$.sample
   else my_stop()
 
-  if( .abundance |> quo_is_symbol() ) .abundance = .abundance
+  if( abundance |> quo_is_symbol() ) abundance = abundance
   else if(".abundance" %in% (.data |> get_tt_columns() |> names()))
-    .abundance = get_tt_columns(.data)$.abundance
+    abundance = get_tt_columns(.data)$.abundance
   else my_stop()
 
-  list(.element = .element, .feature = .feature, .abundance = .abundance)
+  list(.element = .element, .feature = .feature, .abundance = abundance)
 }
 
 #' Get column names either from user or from attributes
@@ -673,9 +674,9 @@ get_abundance_norm_if_exists = function(.data, abundance, .abundance = NULL){
       abundance <- rlang::as_name(rlang::ensym(.abundance))
     }
   }
-  if (.abundance |> quo_is_symbol()) {
+  if (abundance |> quo_is_symbol()) {
     return(list(
-      .abundance = .abundance
+      .abundance = abundance
     ))
   } else {
     if (!is.null(get_tt_columns(.data))) {
@@ -1039,9 +1040,10 @@ univariable_differential_tissue_composition = function(
 				  
 
 					data_for_cox <- .x
-					data_for_cox |> 
-						mutate(.proportion_0_corrected = .proportion_0_corrected  |> boot::logit()) |>
-						survival::coxph(.my_formula, data=_)	|>
+					data_for_cox <- data_for_cox |> 
+						mutate(.proportion_0_corrected = .proportion_0_corrected  |> boot::logit())
+					data_for_cox |>
+						survival::coxph(.my_formula, data=.)	|>
 						broom::tidy() |>
 						select(-term)
 				} else {
@@ -1050,7 +1052,7 @@ univariable_differential_tissue_composition = function(
 				  
 					data_for_beta <- .x
 					data_for_beta |>
-						betareg::betareg(.my_formula, data=_) |>
+						betareg::betareg(.my_formula, data=.) |>
 						broom::tidy() |>
 						filter(component != "precision") |>
 						pivot_wider(names_from = term, values_from = c(estimate, std.error, statistic,   p.value)) |>
@@ -1201,7 +1203,7 @@ rotation = function(m, d) {
 	((bind_rows(
 		c(`1` = cos(r), `2` = -sin(r)),
 		c(`1` = sin(r), `2` = cos(r))
-	) |> as_matrix()) %*% m)
+	) |> as.matrix()) %*% m)
 }
 
 combineByRow <- function(m, fun = NULL) {
