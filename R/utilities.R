@@ -18,7 +18,7 @@
 #' check_and_install_packages(c("dplyr", "ggplot2"))
 #' }
 check_and_install_packages <- function(packages) {
-  rlang::check_installed(
+  check_installed(
     pkg = packages,
     action = function(...) {
       if (!requireNamespace("BiocManager", quietly = TRUE)) {
