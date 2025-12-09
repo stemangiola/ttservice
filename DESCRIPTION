@@ -18,6 +18,7 @@ Imports:
     purrr,
     rlang
 Suggests:
+    BiocManager,
     methods
 Encoding: UTF-8
 LazyData: true
