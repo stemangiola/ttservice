@@ -1,5 +1,3 @@
-# Negation
-not = function(is){	!is }
 
 #' Convert array of quosure (e.g. c(col_a, col_b)) into character vector
 #'
