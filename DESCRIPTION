@@ -1,7 +1,7 @@
 Package: ttservice
 Type: Package
 Title: A Service for Tidy Transcriptomics Software Suite
-Version: 0.6.0
+Version: 0.7.0
 Authors@R: person(given = "Stefano",
                   family = "Mangiola",
                   role = c("aut", "cre"),
