@@ -8,8 +8,7 @@
 #'
 #' @return NULL (invisibly). Called for side effects.
 #'
-#' @keywords internal
-#' @noRd
+#' @export
 #'
 #' @importFrom rlang check_installed
 #'
