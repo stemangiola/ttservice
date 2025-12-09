@@ -1,7 +1,7 @@
 Package: ttservice
 Type: Package
 Title: A Service for Tidy Transcriptomics Software Suite
-Version: 0.7.1
+Version: 0.7.2
 Authors@R: person(given = "Stefano",
                   family = "Mangiola",
                   role = c("aut", "cre"),
@@ -12,8 +12,10 @@ Depends:
     R (>= 4.0.0)
 Imports:
     dplyr,
+    magrittr,
     Matrix,
     plotly,
+    purrr,
     rlang
 Suggests:
     methods
